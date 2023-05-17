@@ -4,7 +4,7 @@ let sign = '';
 let finish = false;
 
 const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const action = ['-', '+', 'X', '/']
+const action = ['-', '+', 'X', '÷']
 
 const out = document.querySelector('.cscreen p');
 
@@ -63,7 +63,7 @@ document.querySelector('.cbtns').onclick = (event) => {
             case "X":
                 a = a * b;
                 break;
-            case "/":
+            case "÷":
                 if (b === '0' ) {
                     out.textContent = 'Ошибка';
                     a = '';
@@ -71,8 +71,14 @@ document.querySelector('.cbtns').onclick = (event) => {
                     sign = '';
                     return;
                 }
-                a = (a / b).toFixed(3);
-                break;
+                if ((a / b) % 1 === 0) {
+                    a = (a / b);
+                    break;
+                }
+                else {
+                    a = (a / b).toFixed(3);
+                    break;
+                }
         }
         finish = true;
         out.textContent = a;
